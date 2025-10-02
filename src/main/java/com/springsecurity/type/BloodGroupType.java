@@ -1,4 +1,4 @@
-package com.springsecurity.entity.type;
+package com.springsecurity.type;
 
 public enum BloodGroupType {
     A_POSITIVE,

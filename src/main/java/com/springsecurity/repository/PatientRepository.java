@@ -2,7 +2,7 @@ package com.springsecurity.repository;
 
 import com.springsecurity.dto.BloodGroupCountResponseEntity;
 import com.springsecurity.entity.Patient;
-import com.springsecurity.entity.type.BloodGroupType;
+import com.springsecurity.type.BloodGroupType;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +29,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     @Query("select p from Patient p where p.birthDate > :birthDate")
     List<Patient> findByBornAfterDate(@Param("birthDate") LocalDate birthDate);
 
-    @Query("select new com.codingshuttle.youtube.hospitalManagement.dto.BloodGroupCountResponseEntity(p.bloodGroup," +
+    @Query("select new com.springsecurity.dto.BloodGroupCountResponseEntity(p.bloodGroup," +
             " Count(p)) from Patient p group by p.bloodGroup")
 //    List<Object[]> countEachBloodGroupType();
     List<BloodGroupCountResponseEntity> countEachBloodGroupType();

@@ -1,6 +1,6 @@
 package com.springsecurity.entity;
 
-import com.springsecurity.entity.type.BloodGroupType;
+import com.springsecurity.type.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

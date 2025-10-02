@@ -24,9 +24,10 @@ public class PatientController {
     }
 
     @GetMapping("/profile")
-    private ResponseEntity<PatientResponseDto> getPatientProfile() {
+    private ResponseEntity<String> getPatientProfile() {
         Long patientId = 4L;
-        return ResponseEntity.ok(patientService.getPatientById(patientId));
+//        return ResponseEntity.ok(patientService.getPatientById(patientId));
+        return ResponseEntity.ok("patientService.getPatientById(patientId)");
     }
 
 }

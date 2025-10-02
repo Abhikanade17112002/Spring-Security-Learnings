@@ -1,6 +1,6 @@
 package com.springsecurity.dto;
 
-import com.springsecurity.entity.type.BloodGroupType;
+import com.springsecurity.type.BloodGroupType;
 import lombok.Data;
 
 import java.time.LocalDate;

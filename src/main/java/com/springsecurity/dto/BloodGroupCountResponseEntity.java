@@ -1,6 +1,6 @@
 package com.springsecurity.dto;
 
-import com.springsecurity.entity.type.BloodGroupType;
+import com.springsecurity.type.BloodGroupType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
