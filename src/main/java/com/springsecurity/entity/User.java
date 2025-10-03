@@ -1,5 +1,6 @@
 package com.springsecurity.entity;
 
+import com.springsecurity.type.ProviderType;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,15 +37,40 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String userRoles;
 
-    public User() {}
+    private String providerId ;
 
-    public User(String firstName, String lastName, String userName, String emailId, String password, String userRoles) {
+    @Enumerated(EnumType.STRING)
+    private ProviderType providerType ;
+
+    public User() {
+    }
+
+    public User(String userId, String firstName, String lastName, String userName, String emailId, String password, String userRoles, String providerId, ProviderType providerType) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.emailId = emailId;
         this.password = password;
         this.userRoles = userRoles;
+        this.providerId = providerId;
+        this.providerType = providerType;
+    }
+
+    public ProviderType getProviderType() {
+        return providerType;
+    }
+
+    public void setProviderType(ProviderType providerType) {
+        this.providerType = providerType;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
 
     public String getUserId() {
@@ -57,6 +83,29 @@ public class User implements UserDetails {
 
     public String getLastName() {
         return lastName;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
     @Override
@@ -119,6 +168,7 @@ public class User implements UserDetails {
         return true;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -129,30 +179,8 @@ public class User implements UserDetails {
                 ", emailId='" + emailId + '\'' +
                 ", password='" + password + '\'' +
                 ", userRoles='" + userRoles + '\'' +
+                ", providerId='" + providerId + '\'' +
+                ", providerType=" + providerType +
                 '}';
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
     }
 }

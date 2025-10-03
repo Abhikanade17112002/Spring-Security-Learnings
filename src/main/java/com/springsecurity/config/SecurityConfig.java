@@ -2,6 +2,7 @@ package com.springsecurity.config;
 
 
 import com.springsecurity.filters.JWTAuthFilter;
+import com.springsecurity.handlers.OAuth2SuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,9 @@ public class SecurityConfig {
     @Autowired
     private JWTAuthFilter jwtAuthFilter ;
 
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler ;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http ) throws Exception {
         http    .sessionManagement(sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -39,7 +43,14 @@ public class SecurityConfig {
                 )
                 .formLogin((auth)->auth.disable())
                 .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login(oAuth->oAuth
+                        .successHandler(oAuth2SuccessHandler)
+                        .failureHandler((request, response, exception) ->
+
+                                System.out.println("ERROR ==> " + exception.getMessage())
+
+                        ));
         ;
 
         return http.build() ;
