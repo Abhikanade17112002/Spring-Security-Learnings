@@ -26,6 +26,45 @@ A comprehensive Spring Boot application for managing hospital operations with se
 - **Authorization**: RBAC with custom authorities
 - **API Testing**: Postman
 
+## Screenshots
+
+### Application Screenshots
+
+Below are screenshots demonstrating the key features and API endpoints:
+
+#### 1. Get All Patients Endpoint
+![Get All Patients](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.13.25%E2%80%AFPM.png)
+
+*Successfully retrieves list of all patients with their details*
+
+#### 2. User Registration
+![Register User](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.14.28%E2%80%AFPM.png)
+
+*New user registration with auto-generated username and role assignment*
+
+#### 3. User Authentication
+![User Login](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.23%E2%80%AFPM.png)
+
+*Login endpoint returning JWT token for authenticated access*
+
+#### 4. Protected Admin Endpoint
+![Admin Patients](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.54%E2%80%AFPM.png)
+
+*Admin-only endpoint requiring valid JWT token and admin role*
+
+#### 5. Database Schema
+![Database ERD](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.18.19%E2%80%AFPM.png)
+
+*Entity-Relationship Diagram showing database structure and relationships*
+
+### Key Features Demonstrated
+
+- **Token-based Authentication**: JWT tokens generated on successful login
+- **Role-based Authorization**: Different access levels for users and admins
+- **Secure Endpoints**: Protected routes require valid authentication
+- **User Management**: Complete user registration and authentication flow
+- **Database Relations**: Normalized database design with proper foreign key constraints
+
 ## API Endpoints
 
 ### Public Endpoints (No Authentication Required)
@@ -120,10 +159,10 @@ Protected Endpoint Access → Validate JWT → Check User Roles → Check Author
 - **Algorithm**: HS256 (HMAC with SHA-256)
 - **Expiration**: 5 minutes (300 seconds)
 - **Payload includes**:
-    - `sub`: Username
-    - `userId`: User ID
-    - `iat`: Issued at timestamp
-    - `exp`: Expiration timestamp
+  - `sub`: Username
+  - `userId`: User ID
+  - `iat`: Issued at timestamp
+  - `exp`: Expiration timestamp
 
 ### Username Generation
 
@@ -150,8 +189,8 @@ User
 
 Example:
 - **User**: Madhuri Kanade
-    - **Role**: ROLE_USER
-        - **Authority**: USER_READ
+  - **Role**: ROLE_USER
+    - **Authority**: USER_READ
 
 ## Role-Based Access Control
 
@@ -180,8 +219,6 @@ POST /api/v1/admin/addrole
 ```
 
 ## Database Schema
-
-![Database ERD]([path/to/database-schema.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.18.19%E2%80%AFPM.png))
 
 The application uses a relational database with the following entities:
 
@@ -315,7 +352,7 @@ export DB_PASSWORD=prod_password
 ### Postman Screenshots
 
 #### 1. Get All Patients (Admin Endpoint)
-![Get All Patients]([path/to/get-all-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.13.25%E2%80%AFPM.png))
+![Get All Patients](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.13.25%E2%80%AFPM.png)
 
 **Endpoint**: `GET /api/v1/admin/patients`
 
@@ -324,7 +361,7 @@ export DB_PASSWORD=prod_password
 **Response**: Returns a list of all patients with their details including ID, name, gender, birth date, and blood group.
 
 #### 2. Register User
-![Register User]([path/to/register-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.14.28%E2%80%AFPM.png))
+![Register User](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.14.28%E2%80%AFPM.png)
 
 **Endpoint**: `POST /api/v1/auth/register`
 
@@ -342,7 +379,7 @@ export DB_PASSWORD=prod_password
 **Response**: Returns the created user with auto-generated username, hashed password, and assigned role with authorities.
 
 #### 3. User Login
-![User Login]([path/to/login-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.23%E2%80%AFPM.png))
+![User Login](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.23%E2%80%AFPM.png)
 
 **Endpoint**: `POST /api/v1/auth/login`
 
@@ -363,7 +400,7 @@ export DB_PASSWORD=prod_password
 ```
 
 #### 4. Get Admin Patients (Protected Route)
-![Get Admin Patients]([path/to/get-admin-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.54%E2%80%AFPM.png))
+![Get Admin Patients](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.54%E2%80%AFPM.png)
 
 **Endpoint**: `GET /api/v1/admin/patients`
 
@@ -418,17 +455,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...
 7. **SQL Injection Prevention**: Use parameterized queries (handled by JPA)
 8. **XSS Protection**: Validate and sanitize all user inputs
 
-## Error Handling
-
-The API returns standard HTTP status codes:
-- `200 OK`: Successful request
-- `201 Created`: Resource created successfully
-- `400 Bad Request`: Invalid request data
-- `401 Unauthorized`: Authentication required
-- `403 Forbidden`: Insufficient permissions
-- `404 Not Found`: Resource not found
-- `500 Internal Server Error`: Server error
-
 ## Contributing
 
 1. Fork the repository
@@ -444,40 +470,6 @@ This project is licensed under the MIT License.
 ## Contact
 
 For questions or support, please contact the development team.
-
-## Screenshots
-
-### Application Screenshots
-
-Below are screenshots demonstrating the key features and API endpoints:
-
-#### 1. Get All Patients Endpoint
-![Get All Patients]([path/to/get-all-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.13.25%E2%80%AFPM.png))
-*Successfully retrieves list of all patients with their details*
-
-#### 2. User Registration
-![Register User]([path/to/register-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.14.28%E2%80%AFPM.png))
-*New user registration with auto-generated username and role assignment*
-
-#### 3. User Authentication
-![User Login]([path/to/login-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.23%E2%80%AFPM.png))
-*Login endpoint returning JWT token for authenticated access*
-
-#### 4. Protected Admin Endpoint
-![Admin Patients]([screenshots/admin-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.54%E2%80%AFPM.png))
-*Admin-only endpoint requiring valid JWT token and admin role*
-
-#### 5. Database Schema
-![Database ERD]([path/to/database-schema.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.18.19%E2%80%AFPM.png))
-*Entity-Relationship Diagram showing database structure and relationships*
-
-### Key Features Demonstrated
-
-- **Token-based Authentication**: JWT tokens generated on successful login
-- **Role-based Authorization**: Different access levels for users and admins
-- **Secure Endpoints**: Protected routes require valid authentication
-- **User Management**: Complete user registration and authentication flow
-- **Database Relations**: Normalized database design with proper foreign key constraints
 
 ---
 
