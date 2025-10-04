@@ -181,7 +181,7 @@ POST /api/v1/admin/addrole
 
 ## Database Schema
 
-![Database ERD](path/to/database-schema.png)
+![Database ERD]([path/to/database-schema.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.18.19%E2%80%AFPM.png))
 
 The application uses a relational database with the following entities:
 
@@ -315,7 +315,7 @@ export DB_PASSWORD=prod_password
 ### Postman Screenshots
 
 #### 1. Get All Patients (Admin Endpoint)
-![Get All Patients](path/to/get-all-patients.png)
+![Get All Patients]([path/to/get-all-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.13.25%E2%80%AFPM.png))
 
 **Endpoint**: `GET /api/v1/admin/patients`
 
@@ -324,7 +324,7 @@ export DB_PASSWORD=prod_password
 **Response**: Returns a list of all patients with their details including ID, name, gender, birth date, and blood group.
 
 #### 2. Register User
-![Register User](path/to/register-user.png)
+![Register User]([path/to/register-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.14.28%E2%80%AFPM.png))
 
 **Endpoint**: `POST /api/v1/auth/register`
 
@@ -342,7 +342,7 @@ export DB_PASSWORD=prod_password
 **Response**: Returns the created user with auto-generated username, hashed password, and assigned role with authorities.
 
 #### 3. User Login
-![User Login](path/to/login-user.png)
+![User Login]([path/to/login-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.23%E2%80%AFPM.png))
 
 **Endpoint**: `POST /api/v1/auth/login`
 
@@ -363,7 +363,7 @@ export DB_PASSWORD=prod_password
 ```
 
 #### 4. Get Admin Patients (Protected Route)
-![Get Admin Patients](path/to/get-admin-patients.png)
+![Get Admin Patients]([path/to/get-admin-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.54%E2%80%AFPM.png))
 
 **Endpoint**: `GET /api/v1/admin/patients`
 
@@ -452,23 +452,23 @@ For questions or support, please contact the development team.
 Below are screenshots demonstrating the key features and API endpoints:
 
 #### 1. Get All Patients Endpoint
-![Get All Patients](screenshots/get-all-patients.png)
+![Get All Patients]([path/to/get-all-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.13.25%E2%80%AFPM.png))
 *Successfully retrieves list of all patients with their details*
 
 #### 2. User Registration
-![Register User](screenshots/register-user.png)
+![Register User]([path/to/register-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.14.28%E2%80%AFPM.png))
 *New user registration with auto-generated username and role assignment*
 
 #### 3. User Authentication
-![User Login](screenshots/login-user.png)
+![User Login]([path/to/login-user.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.23%E2%80%AFPM.png))
 *Login endpoint returning JWT token for authenticated access*
 
 #### 4. Protected Admin Endpoint
-![Admin Patients](screenshots/admin-patients.png)
+![Admin Patients]([screenshots/admin-patients.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.15.54%E2%80%AFPM.png))
 *Admin-only endpoint requiring valid JWT token and admin role*
 
 #### 5. Database Schema
-![Database ERD](screenshots/database-schema.png)
+![Database ERD]([path/to/database-schema.png](https://github.com/Abhikanade17112002/Spring-Security-Learnings/blob/main/src/main/resources/Screenshot%202025-10-04%20at%204.18.19%E2%80%AFPM.png))
 *Entity-Relationship Diagram showing database structure and relationships*
 
 ### Key Features Demonstrated
