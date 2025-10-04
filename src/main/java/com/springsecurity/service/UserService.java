@@ -3,9 +3,12 @@ package com.springsecurity.service;
 
 import com.springsecurity.entity.LogInRequestDTO;
 import com.springsecurity.entity.LogInResponseDTO;
+import com.springsecurity.entity.Roles;
 import com.springsecurity.entity.User;
+import com.springsecurity.repository.RoleRepository;
 import com.springsecurity.repository.UserRepository;
 import com.springsecurity.type.ProviderType;
+import com.springsecurity.type.RoleType;
 import com.springsecurity.utility.AuthUtility;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +25,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -40,6 +46,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleRepository roleRepository ;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -76,7 +85,8 @@ public class UserService implements UserDetailsService {
             System.out.println("GENERATED RANDOM PASSWORD ==> " + randPass);
             user.setPassword(passwordEncoder.encode(randPass));
         }
-        user.setUserName(user.getFirstName()+"."+user.getLastName()+"@"+((int)(Math.random()*10000)));// ✅ Encrypt password
+        user.setUserName(user.getFirstName()+"."+user.getLastName()+"@"+((int)(Math.random()*10000)));
+        // ✅ Encrypt password
         return userRepository.save(user);
     }
 
@@ -133,7 +143,9 @@ public class UserService implements UserDetailsService {
             newUser.setEmailId(email);
             newUser.setFirstName(firstName);
             newUser.setLastName(lastName);
-            newUser.setUserRoles("USER");
+            Roles defaultRole = roleRepository.findByRoleName("ROLE_USER")
+                    .orElseThrow(() -> new RuntimeException("Default role not found"));
+            newUser.setRoles(List.of(defaultRole));
             User signedUpUser = getUserRegistered( newUser) ;
 
             System.out.println("signedUpUser ==> " + signedUpUser);

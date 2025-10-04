@@ -1,14 +1,13 @@
 package com.springsecurity.entity;
 
 import com.springsecurity.type.ProviderType;
+import com.springsecurity.type.RoleType;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -33,9 +32,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    // ✅ Store roles as space-separated string: "ADMIN USER"
-    @Column(nullable = false)
-    private String userRoles;
+    @ManyToMany( fetch = FetchType.EAGER )
+    @JoinTable(
+            name = "UserRolesMapping" ,
+            joinColumns = @JoinColumn( name = "userId") ,
+            inverseJoinColumns = @JoinColumn( name = "roleId")
+    )
+    private List<Roles> roles = new ArrayList<>() ;
 
     private String providerId ;
 
@@ -45,14 +48,14 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String userId, String firstName, String lastName, String userName, String emailId, String password, String userRoles, String providerId, ProviderType providerType) {
+    public User(String userId, String firstName, String lastName, String userName, String emailId, String password, List<Roles> roles, String providerId, ProviderType providerType) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.emailId = emailId;
         this.password = password;
-        this.userRoles = userRoles;
+        this.roles = roles;
         this.providerId = providerId;
         this.providerType = providerType;
     }
@@ -127,24 +130,28 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getUserRoles() {
-        return userRoles;
+    public List<Roles> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(String userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        if (userRoles != null && !userRoles.isBlank()) {
-            List<String> userRolesList = List.of(userRoles.split(" "));
-            for (String role : userRolesList) {
-                authorities.add(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()));
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
+        for (Roles role : roles) {
+            // Add the role itself
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+
+            // Add the authorities linked to this role
+            for (Authorities authority : role.getAuthorities()) {
+                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthorityName()));
             }
         }
-        return authorities;
+        return grantedAuthorities;
     }
 
     // ✅ Return true instead of super
@@ -178,7 +185,7 @@ public class User implements UserDetails {
                 ", userName='" + userName + '\'' +
                 ", emailId='" + emailId + '\'' +
                 ", password='" + password + '\'' +
-                ", userRoles='" + userRoles + '\'' +
+//                ", roles=" + roles +
                 ", providerId='" + providerId + '\'' +
                 ", providerType=" + providerType +
                 '}';
